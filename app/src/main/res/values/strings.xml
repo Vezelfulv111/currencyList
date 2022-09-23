@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Cryptocurrency</string>
+
+    <string-array name="Currenses">
+        <item>curr 1</item>
+        <item>curr 2</item>
+        <item>curr 3</item>
+        <item>curr 4</item>
+    </string-array>
+</resources>
