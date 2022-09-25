@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        android:id="@+id/toolbar2nd"
+        layout="@layout/toolbar2nd">
+    </include>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="574dp"
+        android:text="  import android.app.Activity; import android.os.Bundle; import android.util.Log; import android.view.View; import android.widget.AdapterView; import android.widget.AdapterView.OnItemClickListener; import android.widget.AdapterView.OnItemSelectedListener; import android.widget.ArrayAdapter; import android.widget.ListView;"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2nd" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
