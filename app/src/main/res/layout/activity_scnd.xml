@@ -59,7 +59,7 @@
                 android:textSize="25dip" />
 
             <TextView
-                android:id="@+id/baseInfo2"
+                android:id="@+id/categories"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Какое-то описание"

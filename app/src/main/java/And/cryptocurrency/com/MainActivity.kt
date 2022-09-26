@@ -17,6 +17,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import android.widget.ProgressBar
 import com.android.volley.*
+import org.json.JSONArray
 
 
 class MainActivity : AppCompatActivity() {
@@ -142,8 +143,19 @@ class MainActivity : AppCompatActivity() {
                 try {
 
                 var element: JSONObject = response.get("description") as JSONObject;
-                val Description = v.findViewById(R.id.baseInfo) as TextView
-                Description.text=element.get("en").toString();
+                val description = v.findViewById(R.id.baseInfo) as TextView
+                description.text=element.get("en").toString();
+
+                var categories: JSONArray = response.get("categories") as JSONArray;
+                var categoriesDesc = "";
+                for (i in 0 until categories.length())
+                    {
+                        categoriesDesc = categoriesDesc+categories[i]+", ";
+                    }
+                categoriesDesc=categoriesDesc.substring(0,  categoriesDesc.length - 2);//удаляем последнюю запятую
+                val categoryTextView = v.findViewById(R.id.categories) as TextView
+                categoryTextView.text = categoriesDesc;
+
                 visibilitySecondScreen(v,true);//видимость для 2го экрана
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -151,7 +163,6 @@ class MainActivity : AppCompatActivity() {
             }) {
                 error -> error.printStackTrace()
                 onErrorResponse(error);
-
         }
 
         myQueue.add(request)
