@@ -30,32 +30,32 @@ class ArrayListAdapter(private val context: Activity, private var Allinall: Arra
             if (currency=="eur"){currency="€"}
 
         val currency_name_1 = rowView.findViewById(R.id.currency_name_1) as TextView
-        currency_name_1.text = Allinall[0][position]
+        currency_name_1.text = Allinall[1][position]
 
         val currency_name_2 = rowView.findViewById(R.id.currency_name_2) as TextView
-        currency_name_2.text = Allinall[1][position]
+        currency_name_2.text = Allinall[2][position]
         //текущий курс
         val price = rowView.findViewById(R.id.price) as TextView
-        val value =(Allinall[2][position].toDouble()*100).roundToInt()/100.0//округляем до двух знаков после запятой
+        val value =(Allinall[3][position].toDouble()*100).roundToInt()/100.0//округляем до двух знаков после запятой
         price.text = currency+value.toString();
 
         //изменение в процентах
         val percent = rowView.findViewById(R.id.percent) as TextView
-        var round_percent =  (Allinall[3][position].toDouble()*100).roundToInt()/100.0//округляем до двух знаков после запятой
+        var round_percent =  (Allinall[4][position].toDouble()*100).roundToInt()/100.0//округляем до двух знаков после запятой
         percent.text = "$round_percent%";
         //проверка на цвет процента
-            if (Allinall[3][position].toDouble()>0)
+            if (Allinall[4][position].toDouble()>0)
             {
                 percent.setTextColor(Color.parseColor("#0aad3f"))
                 percent.text = "+$round_percent%";
             }
-            else if (Allinall[3][position].toDouble()<0)
+            else if (Allinall[4][position].toDouble()<0)
             {
                 percent.setTextColor(Color.parseColor("#D31313"))
             }
 
         val img = rowView.findViewById(R.id.img) as ImageView
-        Picasso.with(context).load(Allinall[4][position]).into(img);
+        Picasso.with(context).load(Allinall[5][position]).into(img);
 
         return rowView
     }

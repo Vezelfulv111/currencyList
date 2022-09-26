@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:title="CryptInfo">
+    android:background="@drawable/stroke">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,9 +19,10 @@
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:background="@null"
             android:onClick="GoBack"
-            app:srcCompat="?attr/actionModeCloseDrawable" />
+            android:background="@null"
+            android:src="@drawable/ic_back"
+            />
 
         <TextView
             android:id="@+id/CoinInfo"
@@ -27,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingStart="15dp"
-            android:text="Список криптовалют"
+            android:text="Название криптовалюты"
             android:textColor="@color/black"
             android:textSize="25dip" />
     </LinearLayout>

@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    app:title="CryptInfo">
+    android:layout_height="100dp"
+    android:background="@drawable/stroke"
+    >
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/CoinInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="7dp"
             android:text="Список криптовалют"
+            android:textColor="@color/black"
             android:textSize="25dip"
-            android:textColor="@color/black"/>
+            tools:layout_conversion_absoluteHeight="40dp"
+            tools:layout_conversion_absoluteWidth="251dp"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="-6dp" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
             layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="5dp"
             app:checkedChip="@id/chip_usd"
             app:chipSpacingHorizontal="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,23 +39,35 @@
             app:layout_constraintTop_toBottomOf="@+id/atoolbar"
             app:selectionRequired="true"
             app:singleLine="true"
-            app:singleSelection="true">
+            app:singleSelection="true"
+            tools:layout_conversion_absoluteHeight="53dp"
+            tools:layout_conversion_absoluteWidth="106dp"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="35dp">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_usd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
-                android:text="usd"
-                app:checkedIconEnabled="false" />
+                android:text="USD"
+                android:textAlignment="center"
+                android:minWidth="70dp"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/lightgray"
+                 />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_eur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checkable="true"
-                android:text="eur"
-                app:checkedIconEnabled="false" />
+                android:minWidth="70dp"
+                android:textAlignment="center"
+                android:text="EUR"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/lightgray"
+                />
         </com.google.android.material.chip.ChipGroup>
 
     </LinearLayout>

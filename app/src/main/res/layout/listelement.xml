@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@color/black" />
 
 
     <LinearLayout
