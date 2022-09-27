@@ -23,6 +23,9 @@
     import java.io.ObjectInputStream
 
 
+
+
+
     class basescreenfragment : Fragment() {
 
         private lateinit var currencyList: ListView
@@ -47,12 +50,9 @@
 
             //ListView click listener
             currencyList.setOnItemClickListener { parent, view, position, id ->
-
                 val fragment = secondscreenfragment()
-                val arguments = Bundle()
-                arguments.putString("desired_currency", AllinAll[0][position])
-                arguments.putString("currency_name", AllinAll[1][position])
-                fragment.setArguments(arguments);
+                ParamsClass.id= AllinAll[0][position];
+                ParamsClass.name=AllinAll[1][position];
                 val fragmentManager: FragmentManager? = fragmentManager
                 val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
                 ft.replace(R.id.fragmentContainerView, fragment)
@@ -80,7 +80,6 @@
                     ChipUsd.setTextColor(resources.getColor(R.color.orange))
                 }
             }
-
             serverRequest(defaultCurrency)//запрос на сервер
             ChipUsd.setChipBackgroundColorResource(R.color.lightorange)//так как default
             ChipUsd.setTextColor(resources.getColor(R.color.orange))
@@ -95,6 +94,8 @@
         }
 
         private fun onErrorResponse(volleyError: VolleyError) {
+            //нужно также передать с какого фрагмента переходим на error fragment
+            ParamsClass.whichFragment=1;
             val fragmentManager: FragmentManager? = fragmentManager
             val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
             ft.replace(R.id.fragmentContainerView, errorfragment())

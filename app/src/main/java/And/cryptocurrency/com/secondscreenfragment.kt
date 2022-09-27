@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -40,8 +41,6 @@ class secondscreenfragment : Fragment() {
         Toolbar2.setVisibility(View.VISIBLE);
         Toolbar1.setVisibility(View.GONE);
 
-        val progressBar = view.findViewById(R.id.progressBar2nd) as ProgressBar
-        progressBar.visibility = ProgressBar.VISIBLE
 
         val BtnGoback =  getActivity()?.findViewById(R.id.GoBack) as ImageButton//кнопка возврата на основной экран
         BtnGoback.setOnClickListener {
@@ -51,13 +50,12 @@ class secondscreenfragment : Fragment() {
             ft.commit()
         }
 
-        val arguments = arguments//далее идет получение аргументов с прошлого экрана
-        val id = arguments!!.getString("desired_currency") as String
-        val currency_name = arguments!!.getString("currency_name") as String
         var Title:  TextView = getActivity()?.findViewById(R.id.description) as TextView
-        Title.setText(currency_name)
+        Title.setText(ParamsClass.name)
 
-        serverRequestInfo(id);
+        serverRequestInfo(ParamsClass.id);
+
+        visibilitySecondScreen(view,false);
         return view
     }
 
@@ -86,22 +84,23 @@ class secondscreenfragment : Fragment() {
                     val categoryTextView = view?.findViewById(R.id.categories) as TextView
                     categoryTextView.text = categoriesDesc;
 
-                    visibilitySecondScreen(true);//видимость для 2го экрана
+                    visibilitySecondScreen(requireView(),true);//видимость для 2го экрана
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
             }) {
                 error -> error.printStackTrace()
+                onErrorResponse(error);
         }
 
         val queue = SingleTonRqstQueue.getInstance(getContext() as Activity).requestQueue
         queue.add(request)
     }
 
-    private fun visibilitySecondScreen(flag:Boolean)//видимость для 2го экрана
+    private fun visibilitySecondScreen(view: View,flag:Boolean)//видимость для 2го экрана
     {
-        val progressBar = view?.findViewById(R.id.progressBar2nd) as ProgressBar
-        val Scrollbar =view?.findViewById(R.id.scroolbar) as ScrollView
+        val progressBar = view.findViewById(R.id.progressBar2nd) as ProgressBar
+        val Scrollbar =view.findViewById(R.id.scroolbar) as ScrollView
         if (flag)
         {
             progressBar.visibility = ProgressBar.INVISIBLE
@@ -112,5 +111,14 @@ class secondscreenfragment : Fragment() {
             progressBar.visibility = ProgressBar.VISIBLE
             Scrollbar.visibility=ScrollView.INVISIBLE
         }
+    }
+
+    private fun onErrorResponse(volleyError: VolleyError) {
+        //нужно также передать с какого фрагмента переходим на error fragment
+        ParamsClass.whichFragment=2;
+        val fragmentManager: FragmentManager? = fragmentManager
+        val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
+        ft.replace(R.id.fragmentContainerView, errorfragment())
+        ft.commit()
     }
 }
