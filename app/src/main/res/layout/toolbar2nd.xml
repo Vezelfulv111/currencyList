@@ -19,7 +19,6 @@
             style="@style/Widget.AppCompat.ImageButton"
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:onClick="GoBack"
             android:background="@null"
             android:src="@drawable/ic_back"
             />
