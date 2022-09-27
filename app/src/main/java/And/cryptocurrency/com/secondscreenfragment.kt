@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.FragmentManager
@@ -32,10 +34,16 @@ class secondscreenfragment : Fragment() {
 
         val view: View = inflater!!.inflate(R.layout.secondscreenfragment, container, false)
 
+        //тулбар
+        var Toolbar1: androidx.appcompat.widget.Toolbar = getActivity()?.findViewById(R.id.toolbar) as androidx.appcompat.widget.Toolbar
+        var Toolbar2:  androidx.appcompat.widget.Toolbar = getActivity()?.findViewById(R.id.toolbar2nd) as  androidx.appcompat.widget.Toolbar
+        Toolbar2.setVisibility(View.VISIBLE);
+        Toolbar1.setVisibility(View.GONE);
+
         val progressBar = view.findViewById(R.id.progressBar2nd) as ProgressBar
         progressBar.visibility = ProgressBar.VISIBLE
 
-        val BtnGoback = view.findViewById(R.id.GoBack) as ImageButton//кнопка возврата на основной экран
+        val BtnGoback =  getActivity()?.findViewById(R.id.GoBack) as ImageButton//кнопка возврата на основной экран
         BtnGoback.setOnClickListener {
             val fragmentManager: FragmentManager? = fragmentManager
             val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
@@ -43,8 +51,12 @@ class secondscreenfragment : Fragment() {
             ft.commit()
         }
 
-        val arguments = arguments
+        val arguments = arguments//далее идет получение аргументов с прошлого экрана
         val id = arguments!!.getString("desired_currency") as String
+        val currency_name = arguments!!.getString("currency_name") as String
+        var Title:  TextView = getActivity()?.findViewById(R.id.description) as TextView
+        Title.setText(currency_name)
+
         serverRequestInfo(id);
         return view
     }

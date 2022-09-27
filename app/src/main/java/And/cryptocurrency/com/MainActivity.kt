@@ -16,6 +16,7 @@ import com.google.android.material.chip.ChipGroup
 import org.json.JSONException
 import org.json.JSONObject
 import android.widget.ProgressBar
+import androidx.appcompat.widget.Toolbar
 import com.android.volley.*
 import org.json.JSONArray
 
@@ -26,28 +27,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var Toolbar1: Toolbar;
+        Toolbar1= findViewById(R.id.toolbar)
     }
-
-
-
-
-    fun onErrorResponse(volleyError: VolleyError) {
-        var message: String? = null
-        if (volleyError is NetworkError) {
-            message = "Cannot connect to Internet...Please check your connection!"
-        } else if (volleyError is ServerError) {
-            message = "The server could not be found. Please try again after some time!!"
-        } else if (volleyError is AuthFailureError) {
-            message = "Cannot connect to Internet...Please check your connection!"
-        } else if (volleyError is ParseError) {
-            message = "Parsing error! Please try again after some time!!"
-        } else if (volleyError is NoConnectionError) {
-            message = "Cannot connect to Internet...Please check your connection!"
-        } else if (volleyError is TimeoutError) {
-            message = "Connection TimeOut! Please check your internet connection."
-        }
-    }
-
-
-
 }

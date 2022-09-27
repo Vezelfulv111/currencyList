@@ -5,12 +5,13 @@
     import androidx.fragment.app.Fragment
     import android.view.LayoutInflater
     import android.view.View
+    import android.view.View.GONE
+    import android.view.View.VISIBLE
     import android.view.ViewGroup
     import android.widget.*
     import androidx.fragment.app.FragmentManager
     import androidx.fragment.app.FragmentTransaction
-    import com.android.volley.Request
-    import com.android.volley.RequestQueue
+    import com.android.volley.*
     import com.android.volley.toolbox.JsonArrayRequest
     import com.android.volley.toolbox.Volley
     import com.google.android.material.chip.Chip
@@ -32,6 +33,11 @@
                 View? {
 
             val view: View = inflater!!.inflate(R.layout.basescreenfragment, container, false)
+             //тулбар
+             var Toolbar1: androidx.appcompat.widget.Toolbar = getActivity()?.findViewById(R.id.toolbar) as androidx.appcompat.widget.Toolbar
+             var Toolbar2:  androidx.appcompat.widget.Toolbar = getActivity()?.findViewById(R.id.toolbar2nd) as  androidx.appcompat.widget.Toolbar
+                   Toolbar1.setVisibility(View.VISIBLE);
+                   Toolbar2.setVisibility(View.GONE);
 
             val progressBar = view.findViewById(R.id.progressBar) as ProgressBar
             progressBar.visibility = ProgressBar.VISIBLE
@@ -45,25 +51,18 @@
                 val fragment = secondscreenfragment()
                 val arguments = Bundle()
                 arguments.putString("desired_currency", AllinAll[0][position])
+                arguments.putString("currency_name", AllinAll[1][position])
                 fragment.setArguments(arguments);
                 val fragmentManager: FragmentManager? = fragmentManager
                 val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
                 ft.replace(R.id.fragmentContainerView, fragment)
                 ft.commit()
-
-
-            //    val inflatedView: View = layoutInflater.inflate(R.layout.activity_scnd, null)
-             //   val CoinInfo = inflatedView.findViewById(R.id.CoinInfo) as TextView
-             //   CoinInfo.text = AllinAll[1][position];//устанавливаем имя валюты в тулбар
-            //    setContentView(inflatedView)
-            //    visibilitySecondScreen(inflatedView,false);//видимость 2й экран
-            //    serverRequestInfo(AllinAll[0][position],inflatedView);
             }
 
             //Работа с chips
-            var Chips: ChipGroup =view.findViewById(R.id.chipGroup)
-            var ChipEur: Chip =view.findViewById(R.id.chip_eur)
-            var ChipUsd: Chip =view.findViewById(R.id.chip_usd)
+            var Chips: ChipGroup = getActivity()?.findViewById(R.id.chipGroup) as ChipGroup
+            var ChipEur: Chip =getActivity()?.findViewById(R.id.chip_eur) as Chip
+            var ChipUsd: Chip =getActivity()?.findViewById(R.id.chip_usd) as Chip
             //отправляем текст нажатого Chips в serverRequest для изменения списка валют
             Chips.setOnCheckedChangeListener { group, checkedId ->
                 if (ChipEur.isChecked){
@@ -95,6 +94,12 @@
 
         }
 
+        private fun onErrorResponse(volleyError: VolleyError) {
+            val fragmentManager: FragmentManager? = fragmentManager
+            val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
+            ft.replace(R.id.fragmentContainerView, errorfragment())
+            ft.commit()
+        }
         private fun serverRequest(currency:String) {
             var url ="https://api.coingecko.com/api/v3/coins/markets?vs_currency=$currency&order=market_cap_desc&per_page=20&page=1&sparkline=false"
             val request = JsonArrayRequest(
@@ -131,7 +136,7 @@
                     }
                 }) {
                     error -> error.printStackTrace()
-
+                    onErrorResponse(error);
             }
             val queue = SingleTonRqstQueue.getInstance(getContext() as Activity).requestQueue
             queue.add(request)
