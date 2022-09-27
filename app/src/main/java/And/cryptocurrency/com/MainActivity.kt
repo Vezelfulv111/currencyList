@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                         currencyList.adapter = ListAdapter
 
                         val progressBar = findViewById<View>(R.id.progressBar) as ProgressBar
-                        progressBar.visibility = ProgressBar.INVISIBLE
+                        //progressBar.visibility = ProgressBar.INVISIBLE
 
                     }
                     catch (e: JSONException)
