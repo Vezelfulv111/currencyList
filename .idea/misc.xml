@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Qt/cryptocurrency/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.301" />
+        <entry key="..\:/Qt/cryptocurrency/app/src/main/res/layout/activity_main.xml" value="0.296195652173913" />
+        <entry key="..\:/Qt/cryptocurrency/app/src/main/res/layout/listelement.xml" value="0.33" />
+        <entry key="..\:/Qt/cryptocurrency/app/src/main/res/layout/toolbar.xml" value="0.25" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/drawable-anydpi/ic_back.xml" value="0.26458333333333334" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.296875" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/drawable/chip_style.xml" value="0.18645833333333334" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2923076923076923" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/drawable/red_toast.xml" value="0.14583333333333334" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/drawable/roundcorners.xml" value="0.21354166666666666" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/drawable/stroke.xml" value="0.26458333333333334" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/drawable/toast_drawable.xml" value="0.15" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/activity_scnd.xml" value="0.16301887379120425" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/basescreenfragment.xml" value="0.1" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/errorfragment.xml" value="0.19924529018924966" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/fragment_blank.xml" value="0.14490566559218157" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/fragment_blank2.xml" value="0.23143115942028986" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/fragment_error.xml" value="0.2264151024877837" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/fragment_info_about.xml" value="0.16301887379120425" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/fragmenterror.xml" value="0.1" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/infoabout.xml" value="0.16530797101449277" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/listelement.xml" value="0.9962264509462484" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/redtoast.xml" value="0.2988679352838745" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/secondscreenfragment.xml" value="0.18113208199022698" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/switch_item.xml" value="0.2635416666666667" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/toolbar.xml" value="0.34893617021276596" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/layout/toolbar2nd.xml" value="0.2264151024877837" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/menu/menu.xml" value="0.2988679352838745" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/menu/menu1.xml" value="0.19924529018924966" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1935185185185185" />
+        <entry key="..\:/cryptocurrency/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.18645833333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
