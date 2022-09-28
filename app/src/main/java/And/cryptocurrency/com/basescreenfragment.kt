@@ -60,7 +60,6 @@ import android.widget.TextView
                 ft.commit()
             }
 
-
             //Работа с chips
             val chips: ChipGroup = activity?.findViewById(R.id.chipGroup) as ChipGroup
             val chipEur: Chip = activity?.findViewById(R.id.chip_eur) as Chip
@@ -158,10 +157,11 @@ import android.widget.TextView
             if (flagRefresh==true)
             {
                 //настройка toast
-                val text = "Произошла ошибка при загрузке"
-                val toast = makeText(context, text, Toast.LENGTH_SHORT)
-                val toastView = toast.view
-                toastView!!.setBackgroundResource(R.color.white)
+                val inflater = layoutInflater
+                val layout: View = inflater.inflate(R.layout.redtoast,
+                    view?.findViewById(R.id.toast_layout_root) as ViewGroup?)
+                val toast = makeText(context, "", Toast.LENGTH_SHORT)
+                toast.view = layout;
                 toast.show()
             }
             else {
@@ -175,10 +175,6 @@ import android.widget.TextView
                 ft.commit()
             }
         }
-
-    }
-
-    private fun Toast.setGravity(bottom: Int) {
 
     }
 
