@@ -5,42 +5,33 @@
     import androidx.fragment.app.Fragment
     import android.view.LayoutInflater
     import android.view.View
-    import android.view.View.GONE
-    import android.view.View.VISIBLE
     import android.view.ViewGroup
     import android.widget.*
     import androidx.fragment.app.FragmentManager
     import androidx.fragment.app.FragmentTransaction
     import com.android.volley.*
     import com.android.volley.toolbox.JsonArrayRequest
-    import com.android.volley.toolbox.Volley
     import com.google.android.material.chip.Chip
     import com.google.android.material.chip.ChipGroup
     import org.json.JSONException
     import org.json.JSONObject
-    import java.io.File
-    import java.io.FileInputStream
-    import java.io.ObjectInputStream
-
-
-
 
 
     class basescreenfragment : Fragment() {
 
         private lateinit var currencyList: ListView
-        var defaultCurrency="usd";
-        var AllinAll:Array<MutableList<String>> = emptyArray();
+        var defaultCurrency="usd"
+        var AllinAll:Array<MutableList<String>> = emptyArray()
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
-                View? {
+                View {
 
-            val view: View = inflater!!.inflate(R.layout.basescreenfragment, container, false)
+            val view: View = inflater.inflate(R.layout.basescreenfragment, container, false)
              //тулбар
-             var Toolbar1: androidx.appcompat.widget.Toolbar = getActivity()?.findViewById(R.id.toolbar) as androidx.appcompat.widget.Toolbar
-             var Toolbar2:  androidx.appcompat.widget.Toolbar = getActivity()?.findViewById(R.id.toolbar2nd) as  androidx.appcompat.widget.Toolbar
-                   Toolbar1.setVisibility(View.VISIBLE);
-                   Toolbar2.setVisibility(View.GONE);
+             val toolbar1: androidx.appcompat.widget.Toolbar = activity?.findViewById(R.id.toolbar) as androidx.appcompat.widget.Toolbar
+             val toolbar2:  androidx.appcompat.widget.Toolbar = activity?.findViewById(R.id.toolbar2nd) as  androidx.appcompat.widget.Toolbar
+            toolbar1.visibility = View.VISIBLE
+            toolbar2.visibility = View.GONE
 
             val progressBar = view.findViewById(R.id.progressBar) as ProgressBar
             progressBar.visibility = ProgressBar.VISIBLE
@@ -49,10 +40,10 @@
             currencyList=view.findViewById(R.id.CurrencyList) as ListView // находим список
 
             //ListView click listener
-            currencyList.setOnItemClickListener { parent, view, position, id ->
+            currencyList.setOnItemClickListener { _, _, position, _ ->
                 val fragment = secondscreenfragment()
-                ParamsClass.id= AllinAll[0][position];
-                ParamsClass.name=AllinAll[1][position];
+                ParamsClass.id= AllinAll[0][position]
+                ParamsClass.name=AllinAll[1][position]
                 val fragmentManager: FragmentManager? = fragmentManager
                 val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
                 ft.replace(R.id.fragmentContainerView, fragment)
@@ -60,29 +51,29 @@
             }
 
             //Работа с chips
-            var Chips: ChipGroup = getActivity()?.findViewById(R.id.chipGroup) as ChipGroup
-            var ChipEur: Chip =getActivity()?.findViewById(R.id.chip_eur) as Chip
-            var ChipUsd: Chip =getActivity()?.findViewById(R.id.chip_usd) as Chip
+            val chips: ChipGroup = activity?.findViewById(R.id.chipGroup) as ChipGroup
+            val chipEur: Chip = activity?.findViewById(R.id.chip_eur) as Chip
+            val chipUsd: Chip = activity?.findViewById(R.id.chip_usd) as Chip
             //отправляем текст нажатого Chips в serverRequest для изменения списка валют
-            Chips.setOnCheckedChangeListener { group, checkedId ->
-                if (ChipEur.isChecked){
+            chips.setOnCheckedChangeListener { _, _ ->
+                if (chipEur.isChecked){
                     serverRequest("eur")
-                    ChipUsd.setChipBackgroundColorResource(R.color.lightgray)
-                    ChipUsd.setTextColor(resources.getColor(R.color.black))
-                    ChipEur.setChipBackgroundColorResource(R.color.lightorange)
-                    ChipEur.setTextColor(resources.getColor(R.color.orange))
+                    chipUsd.setChipBackgroundColorResource(R.color.lightgray)
+                    chipUsd.setTextColor(resources.getColor(R.color.black))
+                    chipEur.setChipBackgroundColorResource(R.color.lightorange)
+                    chipEur.setTextColor(resources.getColor(R.color.orange))
                 }
                 else{
                     serverRequest("usd")
-                    ChipEur.setChipBackgroundColorResource(R.color.lightgray)
-                    ChipEur.setTextColor(resources.getColor(R.color.black))
-                    ChipUsd.setChipBackgroundColorResource(R.color.lightorange)
-                    ChipUsd.setTextColor(resources.getColor(R.color.orange))
+                    chipEur.setChipBackgroundColorResource(R.color.lightgray)
+                    chipEur.setTextColor(resources.getColor(R.color.black))
+                    chipUsd.setChipBackgroundColorResource(R.color.lightorange)
+                    chipUsd.setTextColor(resources.getColor(R.color.orange))
                 }
             }
             serverRequest(defaultCurrency)//запрос на сервер
-            ChipUsd.setChipBackgroundColorResource(R.color.lightorange)//так как default
-            ChipUsd.setTextColor(resources.getColor(R.color.orange))
+            chipUsd.setChipBackgroundColorResource(R.color.lightorange)//так как default
+            chipUsd.setTextColor(resources.getColor(R.color.orange))
 
 
             return view
@@ -95,7 +86,7 @@
 
         private fun onErrorResponse(volleyError: VolleyError) {
             //нужно также передать с какого фрагмента переходим на error fragment
-            ParamsClass.whichFragment=1;
+            ParamsClass.whichFragment=1
             val fragmentManager: FragmentManager? = fragmentManager
             val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
             ft.replace(R.id.fragmentContainerView, errorfragment())
@@ -107,7 +98,7 @@
                 Request.Method.GET, url, null,
                 { response ->
                     try {
-                        val name_list: MutableList<String> = mutableListOf()
+                        val namelist: MutableList<String> = mutableListOf()
                         val symbol: MutableList<String> = mutableListOf()
                         val img: MutableList<String> = mutableListOf()
                         val price: MutableList<String> = mutableListOf()
@@ -115,17 +106,17 @@
                         val id: MutableList<String> = mutableListOf()
 
                         for(i in 0 until response.length()){
-                            var element: JSONObject = response[i] as JSONObject;
-                            name_list.add(i,element.get("name").toString())
+                            val element: JSONObject = response[i] as JSONObject
+                            namelist.add(i,element.get("name").toString())
                             symbol.add(i,element.get("symbol").toString())
                             img.add(i,element.get("image").toString())
                             price.add(i,element.get("current_price").toString())
                             percent.add(i,element.get("price_change_percentage_24h").toString())
                             id.add(i,element.get("id").toString())
                         }
-                        AllinAll = arrayOf(id,name_list,symbol,price,percent,img)
-                        var ListAdapter = ArrayListAdapter(getContext() as Activity,AllinAll,currency)
-                        currencyList.adapter = ListAdapter
+                        AllinAll = arrayOf(id,namelist,symbol,price,percent,img)
+                        val listAdapter = ArrayListAdapter(context as Activity,AllinAll,currency)
+                        currencyList.adapter = listAdapter
 
                         val progressBar = view?.findViewById<View>(R.id.progressBar) as ProgressBar
                         progressBar.visibility = ProgressBar.INVISIBLE
@@ -137,9 +128,9 @@
                     }
                 }) {
                     error -> error.printStackTrace()
-                    onErrorResponse(error);
+                    onErrorResponse(error)
             }
-            val queue = SingleTonRqstQueue.getInstance(getContext() as Activity).requestQueue
+            val queue = SingleTonRqstQueue.getInstance(context as Activity).requestQueue
             queue.add(request)
         }
 
