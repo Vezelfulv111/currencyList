@@ -19,6 +19,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.widget.Toolbar
 import com.android.volley.*
 import org.json.JSONArray
+import kotlin.math.roundToInt
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,5 +28,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val input = 3.00159265359
+
+        val a1="{input.format(2)}";
+        val formatted = String.format("%.2f", input) ;
+
+        val a4=4;
     }
+
 }

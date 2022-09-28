@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:text=" Id"
             android:textColor="@color/lightgray"
+            android:textAllCaps="true"
             />
 
     </LinearLayout>

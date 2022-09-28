@@ -130,8 +130,8 @@ import android.widget.TextView
                             percent.add(i,element.get("price_change_percentage_24h").toString())
                             id.add(i,element.get("id").toString())
                         }
-                        AllinAll = arrayOf(id,namelist,symbol,price,percent,img)
-                        val listAdapter = ArrayListAdapter(context as Activity,AllinAll,currency)
+                        AllinAll = arrayOf(id,namelist,symbol,price,percent,img)//все аргументы заполняем в один массив
+                        val listAdapter = ArrayListAdapter(context as Activity,AllinAll,currency)//передаем аргументы в адаптер
                         currencyList.adapter = listAdapter
 
                         val progressBar = view?.findViewById<View>(R.id.progressBar) as ProgressBar

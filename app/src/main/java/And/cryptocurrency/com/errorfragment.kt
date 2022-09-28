@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
 
 class errorfragment : Fragment() {
 
@@ -16,17 +18,17 @@ class errorfragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?):
             View {
 
-        val view: View = inflater!!.inflate(R.layout.errorfragment, container, false)
+        val view: View = inflater.inflate(R.layout.errorfragment, container, false)
 
-        val btnGoback =  activity?.findViewById(R.id.GoBack) as ImageButton//кнопка возврата на основной экран
-        btnGoback.setOnClickListener {
+        val btnBack =  activity?.findViewById(R.id.GoBack) as ImageButton//кнопка возврата на основной экран
+        btnBack.setOnClickListener {
             val fragmentManager: FragmentManager? = fragmentManager
             val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
             ft.replace(R.id.fragmentContainerView, basescreenfragment())
             ft.commit()
         }
 
-        var refreshButton: Button = view.findViewById(R.id.refreshBtn) as Button
+        val refreshButton: Button = view.findViewById(R.id.refreshBtn) as Button//кнопка перезагрузки
         refreshButton.setOnClickListener{
             val fragmentManager: FragmentManager? = fragmentManager
             val ft = fragmentManager?.beginTransaction()!!
