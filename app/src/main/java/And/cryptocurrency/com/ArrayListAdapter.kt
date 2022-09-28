@@ -1,6 +1,5 @@
 package And.cryptocurrency.com
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
 import android.view.View
@@ -17,7 +16,6 @@ class ArrayListAdapter(private val context: Activity, private var Allinall: Arra
     : ArrayAdapter<Any>(context, R.layout.listelement, Allinall[1] as List<Any>) {
 
 
-    @SuppressLint("ResourceAsColor")
     override fun getView(position: Int, view: View?, parent: ViewGroup): View {
         val inflater = context.layoutInflater
         val rowView = inflater.inflate(R.layout.listelement, null, true)
@@ -34,12 +32,13 @@ class ArrayListAdapter(private val context: Activity, private var Allinall: Arra
         //текущий курс
         val price = rowView.findViewById(R.id.price) as TextView
         val value =(Allinall[3][position].toDouble()*100).roundToInt()/100.0//округляем число. Если использовать только строчку ниже, нет округления
-        price.text = currency+String.format("%.2f", value)
+        val valueString=comma(value)   //проверка на запятую если тысячи
+        price.text = currency+valueString
 
         //изменение в процентах
         val percent = rowView.findViewById(R.id.percent) as TextView
         var roundPercent =  (Allinall[4][position].toDouble()*100).roundToInt()/100.0//округляем до двух знаков после запятой
-        val resultPercentText=String.format("%.2f", roundPercent)+"%";
+        val resultPercentText=String.format("%.2f", roundPercent)+"%"
         percent.text = resultPercentText;
         //проверка на цвет процента
             if (Allinall[4][position].toDouble()>0)
@@ -58,6 +57,21 @@ class ArrayListAdapter(private val context: Activity, private var Allinall: Arra
         return rowView
     }
 
+     private fun comma(value:Double): String
+    {
+        var resultText=""
+        if (value>=1000){
+            val l1=(value/1000).toInt()//убираем значения после запятой
+            val l2=value-l1*1000
+            val strlast=String.format("%.2f", l2)
+            resultText=l1.toString()+","+strlast
+        }
+        else{
+            resultText=String.format("%.2f", value)
+        }
+
+        return  resultText;
+    }
 
 
 }
