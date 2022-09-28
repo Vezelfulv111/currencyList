@@ -30,7 +30,8 @@
             android:orientation="vertical"
             android:paddingLeft="5dp"
             android:paddingTop="5dp"
-            android:paddingRight="5dp">
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp">
 
             <ImageView
                 android:id="@+id/image2ndScreen"
@@ -51,7 +52,9 @@
                 android:id="@+id/baseInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:text="Описание"
+                android:textSize="16dip"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -59,14 +62,16 @@
                 android:layout_height="wrap_content"
                 android:text="Категории"
                 android:textColor="@color/black"
-                android:textSize="25dip" />
+                android:textSize="25dip"
+                android:paddingTop="10dp"/>
 
             <TextView
                 android:id="@+id/categories"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Какое-то описание"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="16dip"/>
 
         </LinearLayout>
     </ScrollView>

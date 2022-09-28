@@ -2,6 +2,7 @@ package And.cryptocurrency.com
 
 import android.app.Activity
 import android.os.Bundle
+import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,7 +55,7 @@ class secondscreenfragment : Fragment() {
     }
 
     private fun serverRequestInfo(id:String){
-        val url = "https://api.coingecko.com/api/v3/coins/$id?localization=true"
+        val url = "https://api.coingecko.com/api/v3/coins/$id?localization=false"
         val request = JsonObjectRequest(
             Request.Method.GET, url, null,
             { response ->
@@ -68,6 +69,9 @@ class secondscreenfragment : Fragment() {
 
                     val description = view?.findViewById(R.id.baseInfo) as TextView
                     description.text=element.get("en").toString()
+
+                    var a = element.get("en").toString();
+                    description.text=Html.fromHtml(a.replace("\n", "<br/>")).toString()
 
                     val categories: JSONArray = response.get("categories") as JSONArray;
                     var categoriesDesc = "";
