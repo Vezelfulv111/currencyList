@@ -40,7 +40,7 @@ class secondscreenfragment : Fragment() {
             ft.commit()
         }
 
-        var title:  TextView = activity?.findViewById(R.id.description) as TextView
+        val title:  TextView = activity?.findViewById(R.id.description) as TextView
         title.text = ParamsClass.name
 
         serverRequestInfo(ParamsClass.id)
@@ -69,7 +69,7 @@ class secondscreenfragment : Fragment() {
                     val description = view?.findViewById(R.id.baseInfo) as TextView
                     description.text=element.get("en").toString()
 
-                    var categories: JSONArray = response.get("categories") as JSONArray;
+                    val categories: JSONArray = response.get("categories") as JSONArray;
                     var categoriesDesc = "";
                     for (i in 0 until categories.length())
                     {
@@ -89,6 +89,7 @@ class secondscreenfragment : Fragment() {
 
         val queue = SingleTonRqstQueue.getInstance(context as Activity).requestQueue
         queue.add(request)
+        queue.cache.remove(url)//убираем кеш
     }
 
     private fun visibilitySecondScreen(view: View,flag:Boolean)//видимость для 2го экрана

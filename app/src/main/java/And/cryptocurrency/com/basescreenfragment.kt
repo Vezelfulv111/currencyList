@@ -1,7 +1,12 @@
     package And.cryptocurrency.com
 
+    import android.annotation.SuppressLint
     import android.app.Activity
+    import android.graphics.Color
+    import android.graphics.Color.RED
+    import android.graphics.Color.red
     import android.os.Bundle
+    import android.view.Gravity
     import androidx.fragment.app.Fragment
     import android.view.LayoutInflater
     import android.view.View
@@ -9,12 +14,17 @@
     import android.widget.*
     import androidx.fragment.app.FragmentManager
     import androidx.fragment.app.FragmentTransaction
+    import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     import com.android.volley.*
     import com.android.volley.toolbox.JsonArrayRequest
     import com.google.android.material.chip.Chip
     import com.google.android.material.chip.ChipGroup
     import org.json.JSONException
     import org.json.JSONObject
+import android.widget.Toast
+    import android.widget.Toast.makeText
+import android.widget.TextView
+    import androidx.core.content.ContextCompat
 
 
     class basescreenfragment : Fragment() {
@@ -50,6 +60,7 @@
                 ft.commit()
             }
 
+
             //Работа с chips
             val chips: ChipGroup = activity?.findViewById(R.id.chipGroup) as ChipGroup
             val chipEur: Chip = activity?.findViewById(R.id.chip_eur) as Chip
@@ -74,7 +85,20 @@
             serverRequest(defaultCurrency)//запрос на сервер
             chipUsd.setChipBackgroundColorResource(R.color.lightorange)//так как default
             chipUsd.setTextColor(resources.getColor(R.color.orange))
+            chipEur.setChipBackgroundColorResource(R.color.lightgray)//так как default
+            chipEur.setTextColor(resources.getColor(R.color.black))
 
+            //обновление списка c помощью pull
+            val swipeToRefreshLV = view.findViewById(R.id.idSwipeToRefresh) as SwipeRefreshLayout;
+            swipeToRefreshLV.setOnRefreshListener {
+                swipeToRefreshLV.isRefreshing = false
+                if (chipEur.isChecked){
+                    serverRequest("eur",true)
+                }
+                else{
+                    serverRequest("usd",true)
+                }
+            }
 
             return view
         }
@@ -84,15 +108,8 @@
 
         }
 
-        private fun onErrorResponse(volleyError: VolleyError) {
-            //нужно также передать с какого фрагмента переходим на error fragment
-            ParamsClass.whichFragment=1
-            val fragmentManager: FragmentManager? = fragmentManager
-            val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
-            ft.replace(R.id.fragmentContainerView, errorfragment())
-            ft.commit()
-        }
-        private fun serverRequest(currency:String) {
+
+        private fun serverRequest(currency:String,flagRefresh:Boolean=false) {
             var url ="https://api.coingecko.com/api/v3/coins/markets?vs_currency=$currency&order=market_cap_desc&per_page=20&page=1&sparkline=false"
             val request = JsonArrayRequest(
                 Request.Method.GET, url, null,
@@ -128,10 +145,40 @@
                     }
                 }) {
                     error -> error.printStackTrace()
-                    onErrorResponse(error)
+                    onErrorResponse(error,flagRefresh)
             }
             val queue = SingleTonRqstQueue.getInstance(context as Activity).requestQueue
             queue.add(request)
+            queue.cache.remove(url)//убираем кеш
+        }
+
+        private fun onErrorResponse(volleyError: VolleyError, flagRefresh:Boolean=false) {
+            //нужно также передать с какого фрагмента переходим на error fragment
+
+            if (flagRefresh==true)
+            {
+                //настройка toast
+                val text = "Произошла ошибка при загрузке"
+                val toast = makeText(context, text, Toast.LENGTH_SHORT)
+                val toastView = toast.view
+                toastView!!.setBackgroundResource(R.color.white)
+                toast.show()
+            }
+            else {
+                val chips: ChipGroup = activity?.findViewById(R.id.chipGroup) as ChipGroup
+                chips.setOnCheckedChangeListener(null)//убираем listener в случае смены экрана
+
+                ParamsClass.whichFragment = 1
+                val fragmentManager: FragmentManager? = fragmentManager
+                val ft: FragmentTransaction = fragmentManager?.beginTransaction()!!
+                ft.replace(R.id.fragmentContainerView, errorfragment())
+                ft.commit()
+            }
         }
 
     }
+
+    private fun Toast.setGravity(bottom: Int) {
+
+    }
+
